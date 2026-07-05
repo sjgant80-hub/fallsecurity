@@ -1,0 +1,92 @@
+{
+  "$schema": "https://sjgant80-hub.github.io/onehub/modules/manifest.schema.json",
+  "name": "fallsecurity",
+  "version": "1.0.0",
+  "publisher": "AI-Native Solutions",
+  "publisher_url": "https://www.ai-nativesolutions.com/",
+  "licence": "MIT",
+  "description": "GDPR compliance module for FallHub. Consent management, access logs, DPIA templates, breach playbooks, AML checklist scaffolding. UK-primary, extensible.",
+  "provides": [
+    "gdpr_compliance",
+    "consent_management",
+    "dpia_templates",
+    "breach_playbooks",
+    "aml_checklist",
+    "access_logs"
+  ],
+  "tools": [
+    {
+      "name": "record_consent",
+      "description": "Log a customer's data consent decision with timestamp + purpose + granularity",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "customer_id": { "type": "string" },
+          "purpose": { "type": "string" },
+          "granted": { "type": "boolean" },
+          "lawful_basis": { "type": "string", "enum": ["consent", "contract", "legitimate_interest", "legal_obligation", "vital_interest", "public_task"] }
+        },
+        "required": ["customer_id", "purpose", "granted", "lawful_basis"]
+      },
+      "guardrails": { "always_auto": true },
+      "reversible_ms": 0
+    },
+    {
+      "name": "dpia_draft",
+      "description": "Generate a DPIA draft for a new processing activity",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "activity": { "type": "string" },
+          "data_types": { "type": "array", "items": { "type": "string" } },
+          "recipients": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["activity", "data_types"]
+      },
+      "guardrails": { "auto_low": false, "auto_med": true },
+      "reversible_ms": 3600000
+    },
+    {
+      "name": "breach_check",
+      "description": "Run a breach-notification-72h clock and produce ICO-ready draft if triggered",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "incident_type": { "type": "string" },
+          "affected_count": { "type": "integer" },
+          "data_types": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["incident_type", "affected_count"]
+      },
+      "guardrails": { "always_auto": false, "auto_high": true },
+      "reversible_ms": 0
+    },
+    {
+      "name": "subject_access_response",
+      "description": "Draft an SAR response with all held data on a subject",
+      "parameters": {
+        "type": "object",
+        "properties": { "subject_id": { "type": "string" } },
+        "required": ["subject_id"]
+      },
+      "guardrails": { "auto_low": false, "auto_med": true },
+      "reversible_ms": 3600000
+    }
+  ],
+  "kernel_extension": {
+    "compliance": {
+      "jurisdiction": "GB",
+      "ico_reg_number": null,
+      "dpo_contact": null,
+      "retention_days": 730,
+      "lawful_bases_in_use": []
+    }
+  },
+  "compatible_verticals": ["*"],
+  "requires": ["byok_adapter@>=1.0.0", "kernel", "events"],
+  "ui_surfaces": ["modules/fallsecurity/panel.html"],
+  "js_entrypoint": "modules/fallsecurity/index.js",
+  "mit": true,
+  "konomi_seal": "◊·κ=1",
+  "estate": true
+}
