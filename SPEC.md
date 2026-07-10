@@ -215,11 +215,11 @@ The LLM is at V4 (output generation). It's ONE vertex. The other 7 vertices + Ω
 - anyone who watched the Fable 5 outage and realised their AI has no immune system
 
 **PRICING:**
-| Tier | Price | What |
+| Tier | Access | What |
 |---|---|---|
 | **Sovereign** | free forever | MIT, single-node, your hardware |
-| **Pro** | £49/month | trajectory dashboard, coherence alerts, multi-model |
-| **Enterprise** | £499/month | mesh deployment, cross-node immune system, SLA |
+| **Pro** | TBAnth | trajectory dashboard, coherence alerts, multi-model |
+| **Enterprise** | TBAnth | mesh deployment, cross-node immune system, SLA |
 
 **COMPETITIVE EDGE:**
 - every competitor sells filters (walls, classifiers, sandboxes)
