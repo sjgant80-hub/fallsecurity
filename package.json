@@ -1,0 +1,12 @@
+{
+  "name": "fallsecurity",
+  "version": "0.2.0",
+  "description": "FallCube — an 8+1 vertex validation pipeline and Ω coherence resolver for hardening LLM agents. Single-file browser demo plus a Node test suite that runs the extracted logic.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Simon Gant",
+  "homepage": "https://github.com/sjgant80-hub/fallsecurity",
+  "scripts": {
+    "test": "node test.mjs"
+  }
+}
